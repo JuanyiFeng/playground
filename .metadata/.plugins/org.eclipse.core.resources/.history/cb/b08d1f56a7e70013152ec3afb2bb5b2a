@@ -1,0 +1,27 @@
+object Palid {
+
+  def main(args: Array[String]): Unit = {
+    
+  }
+  
+  def palid(input: String): Boolean = {
+    val inputArray: Array[Char] = input.toCharArray()
+    
+    val subString = inputArray match {
+      case Array(first, _, last) => 
+    } 
+    
+    
+  }
+  
+  def checkPalid(input: String): Boolean = {
+    val inputArray: Array[Char] = input.toCharArray()
+    
+    inputArray match {
+      case Array(first, _, last) => first == last
+      case Array(first, last)    => first == last
+      case Array(onlyOne)        => true                   
+    }
+  }
+  
+}

@@ -1,0 +1,69 @@
+import scala.collection.mutable._
+
+object GraphClone {
+  
+  var m: HashMap[Node, List[Node]] = new HashMap[Node, List[Node]]()
+  
+  def main(args: Array[String]): Unit = {
+    
+    val oldGraph = defaultGraph
+    val newGraph = new Node(oldGraph.name)
+    
+    copyGraphIntoMap(oldGraph)
+    
+    println("!!!!!!!!!!!!!!!!!!!!!!!")
+    println(m.size)
+    
+    
+  }
+  
+  private def copyGraphIntoMap(g: Node): Unit = {
+    while(!g.neighbours.isEmpty){
+      g.neighbours.foreach(n => {
+        println(n.name )
+        if(m.get(n).isEmpty){
+          m.+=((n, n.neighbours))
+          copyGraphIntoMap(n)
+        }        
+      })
+    }
+    m
+  }
+  
+  
+  
+  
+  
+  
+  def defaultGraph: Node = {
+    val a: Node = new Node("A") 
+    val b: Node = new Node("B") 
+    val c: Node = new Node("C") 
+    val d: Node = new Node("D") 
+    val e: Node = new Node("E") 
+    val f: Node = new Node("F") 
+    val g: Node = new Node("G") 
+    
+    a.neighbours = List(e,f)
+    b.neighbours = List(e)
+    c.neighbours = List(e)
+    d.neighbours = List(g)
+    e.neighbours = List(a, b, g)
+    f.neighbours = List(d)
+    g.neighbours = List(d, e)
+    
+    a
+  }
+
+}
+
+
+
+
+
+
+
+
+case class Node(name: String){
+  var neighbours: List[Node] = Nil
+}

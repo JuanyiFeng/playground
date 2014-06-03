@@ -1,0 +1,24 @@
+object Palindrome {
+
+  def main(args: Array[String]): Unit = {
+    //run time is N
+    println(checkPalid("abcdcba"))
+  }
+  
+  
+  def checkPalid(input: String): Boolean = {
+    val inputList: List[Char] = input.toList  
+    inputList match {
+      case ia if (inputList.length >=2) => {
+        if(!ia.head.equals(ia.last)) false else checkPalid(subString(input))
+      }
+      case _ => true                   
+    }
+
+  }
+  
+  private def subString(input: String): String = {
+    if(input.length() <= 1) "" else input.substring(1, input.length()-1)
+  }
+  
+}

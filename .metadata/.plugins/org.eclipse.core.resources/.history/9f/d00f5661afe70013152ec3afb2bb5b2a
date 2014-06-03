@@ -1,0 +1,6 @@
+object GraphClone {
+
+}
+
+
+case class Node(neighbours: List(Node))

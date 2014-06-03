@@ -1,0 +1,35 @@
+object GraphClone {
+  
+  
+  def defaultGraph: Node = {
+    val a: Node = new Node("A") 
+    val b: Node = new Node("B") 
+    val c: Node = new Node("C") 
+    val d: Node = new Node("D") 
+    val e: Node = new Node("E") 
+    val f: Node = new Node("F") 
+    val g: Node = new Node("G") 
+    
+    a.neighbours = List(e,f)
+    b.neighbours = List(e)
+    c.neighbours = List(e)
+    d.neighbours = List(g)
+    e.neighbours = List(a, b, g)
+    f.neighbours = List(d)
+    g.neighbours = List(d, e)
+    
+    a
+  }
+
+}
+
+
+
+
+
+
+
+
+class Node(name: String){
+  var neighbours: List[Node]
+}

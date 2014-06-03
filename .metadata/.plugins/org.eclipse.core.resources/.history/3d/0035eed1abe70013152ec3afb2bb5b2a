@@ -1,0 +1,24 @@
+object Palid {
+
+  def main(args: Array[String]): Unit = {
+    println(checkPalid("abba"))
+  }
+  
+  
+  def checkPalid(input: String): Boolean = {
+    val inputArray: List[Char] = input.toList
+    
+    inputArray match {
+      case ia if inputArray.length >=2 => {
+        if(!inputArray.head.equals(inputArray.last)) false else checkPalid(subString(input))
+      }
+      case _        => true                   
+    }
+
+  }
+  
+  private def subString(input: String): String = {
+    if(input.length() <= 1) "" else input.substring(1, input.length()-1)
+  }
+  
+}

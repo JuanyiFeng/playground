@@ -1,0 +1,97 @@
+import scala.collection.mutable._
+
+object GraphClone {
+  //key is old node, value is new node
+  var m: HashMap[Node, Node] = new HashMap[Node, Node]()
+  
+  def main(args: Array[String]): Unit = {
+    
+    val oldGraph = defaultGraph
+    //create first node for the new graph
+    val newGraph = new Node(oldGraph.name)
+    newGraph.neighbours  = oldGraph.neighbours 
+    
+    oldGraph.print
+    
+    copyNodeName(oldGraph)
+    
+    copyNodeNeighbours(m)
+    
+    
+  }
+  
+  //traverse the graph and copy nodes with names, keep the neighbours as old nodes
+  private def copyNodeName(g: Node): Unit = {   
+   g.neighbours.foreach(n => {
+     if(m.get(n).isEmpty){
+        var newNode = new Node(n.name)
+        newNode.neighbours  = n.neighbours 
+        m.+=((n, newNode))
+        copyNodeName(n)
+     }        
+   })
+  }
+ 
+  //traverse the hashmap and copy neighbours to the new node
+  private def copyNodeNeighbours(m: HashMap[Node, Node]): Unit =  {
+    m.foreach(e => {
+      val newNeighbour: List[Node] = e._1 .neighbours.map(m.get(_).get)
+      e._2 .neighbours  = newNeighbour
+    })
+    
+  }
+  
+  
+  
+  
+  
+  
+  def defaultGraph: Node = {
+    val a: Node = new Node("A") 
+    val b: Node = new Node("B") 
+    val c: Node = new Node("C") 
+    val d: Node = new Node("D") 
+    val e: Node = new Node("E") 
+    val f: Node = new Node("F") 
+    val g: Node = new Node("G") 
+    
+    a.neighbours = List(e,f)
+    b.neighbours = List(e)
+    c.neighbours = List(e)
+    d.neighbours = List(g)
+    e.neighbours = List(a, b, g)
+    f.neighbours = List(d)
+    g.neighbours = List(d, e)
+    
+    a
+  }
+  
+  
+  def print(node: Node): Unit = {
+    val temp: ArrayBuffer[Node] = new ArrayBuffer[Node]() 
+    node.neighbours .foreach(n => {
+      if(!temp.exists(_==n)){
+        temp.append(n)
+        val pattern: String = "Node: [ %s ] : Neighbours: List[ %s ]" 
+        val neighrbourString: String = n.neighbours.mkString(", ")
+        println(pattern.format(n.name , neighrbourString))
+        n.neighbours.foreach(print(_))
+      }
+    })
+  }
+
+}
+
+
+
+
+
+
+
+
+case class Node(name: String){
+  
+  var neighbours: List[Node] = Nil
+  
+  
+}
