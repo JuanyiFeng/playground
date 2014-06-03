@@ -8,12 +8,10 @@ object GraphClone {
     val oldGraph = defaultGraph
     drawGraph(oldGraph)
     println("=========================")
-    
     //create new nodes and put them into a hash map
     copyNodeName(oldGraph) 
    //assign neighours to new nodes
-    copyNodeNeighbours(m)  
-    
+    copyNodeNeighbours(m)   
     val newGraph = m.get(oldGraph).get
     drawGraph(newGraph)  
   }
@@ -39,8 +37,7 @@ object GraphClone {
     
   }
   
-  //TODO: refactor this to generate random graph
-  private def defaultGraph: Node = {
+  def defaultGraph: Node = {
     val a: Node = new Node("A") 
     val b: Node = new Node("B") 
     val c: Node = new Node("C") 
@@ -62,9 +59,6 @@ object GraphClone {
   
   val temp: ArrayBuffer[Node] = new ArrayBuffer[Node]() 
   
-  /**
-   * Use to print out the graph in string format
-   */
   def drawGraph(node: Node): Unit = {
     node.neighbours .foreach(n => {
       if(!temp.exists(_==n)){
@@ -79,6 +73,16 @@ object GraphClone {
 
 }
 
-case class Node(name: String){  
-  var neighbours: List[Node] = Nil  
+
+
+
+
+
+
+
+case class Node(name: String){
+  
+  var neighbours: List[Node] = Nil
+  
+  
 }
